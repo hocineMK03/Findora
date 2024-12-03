@@ -58,3 +58,6 @@ you go to the server folder and then you run
 ```
 python build_model.py
 ```
+# disclamer 
+you only need to run the model once
+and if you run it twice the mongo db collection data will duplicate as i didn't implement something for that

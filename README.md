@@ -3,7 +3,7 @@ Findora is an Information Retrieval (IR) university module project built to demo
 
 ## Instalation guide
 
-#requirements
+# requirements
 ```
 
 Nodejs

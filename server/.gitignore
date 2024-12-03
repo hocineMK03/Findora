@@ -1,0 +1,12 @@
+# Environment variables
+.env
+*.env
+
+# Virtual environments
+venv/
+env/
+
+# Flask extensions
+instance/
+.mypy_cache/
+.pytest_cache/

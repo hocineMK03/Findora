@@ -1,0 +1,53 @@
+/* Container for the entire page */
+.information-container {
+    padding: 20px;
+    max-width: 900px;
+    
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .information-container h1 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Paragraph styling for the data */
+  .information-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+  
+  /* Loading state */
+  .loading-text {
+    font-size: 18px;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .information-container {
+      padding: 15px;
+      margin: 10px;
+    }
+  
+    .information-container h1 {
+      font-size: 24px;
+    }
+  
+    .information-container p {
+      font-size: 14px;
+    }
+  }
+  

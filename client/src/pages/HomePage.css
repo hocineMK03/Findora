@@ -1,0 +1,178 @@
+.home-container {
+   height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.home-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+}
+.home-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    text-align: center;
+  }
+  
+
+  
+  .home-title h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    position: relative; /* Make the h1 the reference point for the line */
+    display: inline-block; /* Ensure the h1 only takes up as much space as the text */
+    padding-left: 10px; /* Optional: Add some padding to the left if you need space */
+  }
+  
+
+.home-title p {
+    text-align: start;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.home-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.home-search input {
+    width: 40%;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.home-search textarea {
+   
+    width: 50%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    resize: none; /* Prevent manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+    line-height: 1.5; /* Adjust line height */
+    transition: height 0.2s ease; /* Smooth transition */
+  }
+  
+.home-search button {
+    padding: 1rem 2rem;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .home-search {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .home-search textarea {
+        width: 70%;
+        font-size: 1rem;
+    }
+
+    .home-title h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        position: relative; /* Make the h1 the reference point for the line */
+        display: inline-block; /* Ensure the h1 only takes up as much space as the text */
+        padding-left: 10px; /* Optional: Add some padding to the left if you need space */
+      }
+      
+    
+    .home-title p {
+        text-align: start;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
+
+@media (max-width:425px){
+    .home-search input {
+        width: 70%;
+    }
+    .home-search textarea {
+        width: 90%;
+        padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    
+    line-height: 1.1; /* Adjust line height */
+    transition: height 0.2s ease;
+    }
+    .home-title h1 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        position: relative; /* Make the h1 the reference point for the line */
+        display: inline-block; /* Ensure the h1 only takes up as much space as the text */
+        padding-left: 10px; 
+        text-align: center;/* Optional: Add some padding to the left if you need space */
+      }
+      
+    
+    .home-title p {
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+}
+
+@media (min-width:1440){
+    .home-search input {
+        width: 30%;
+    }
+    .home-search textarea {
+        width: 40%;
+        padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    resize: none; /* Prevent manual resizing */
+    overflow: hidden; /* Hide scrollbars */
+    line-height: 1.5; /* Adjust line height */
+    transition: height 0.2s ease; /* Smooth transition */
+    }
+    .home-title h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        position: relative; /* Make the h1 the reference point for the line */
+        display: inline-block; /* Ensure the h1 only takes up as much space as the text */
+        padding-left: 10px; /* Optional: Add some padding to the left if you need space */
+      }
+      
+    
+    .home-title p {
+        text-align: start;
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+}

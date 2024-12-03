@@ -1,9 +1,9 @@
-### Findora
+# Findora
 Findora is an Information Retrieval (IR) university module project built to demonstrate the use of the bigram algorithm for efficient text processing and retrieval. The project integrates a Python-based Flask backend with a React.js frontend and uses MongoDB for data storage.
 
 ## Instalation guide
 
-# requirements
+### requirements
 ```
 
 Nodejs

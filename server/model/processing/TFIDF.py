@@ -26,15 +26,15 @@ class TFIDF:
                         seen_terms_in_document.add(word)
                         
                         # Update the document frequency for each term   
-                        if word in termDocFreq:
+                        """ if word in termDocFreq:
                             termDocFreq[word] += 1
                         else:
-                            termDocFreq[word] = 1
+                            termDocFreq[word] = 1 """
             
             totaldocs = len(filesData)
             idfTable = {}
             
-            # Step 2: Calculate IDF for each term
+            """ # Step 2: Calculate IDF for each term
             for term, docFreq in termDocFreq.items():
                 if docFreq == 0:
                     continue  # Skip terms that appear in no documents (shouldn't happen)
@@ -58,11 +58,23 @@ class TFIDF:
                     if term not in invertedIndex:
                         invertedIndex[term] = []
                     
-                    invertedIndex[term].append({"doc_id": filename, "weight": tfidf})
+                    invertedIndex[term].append({"doc_id": filename, "weight": tfidf}) """
+            output_data = {}
+            for fileName, tf in tfTable.items():
+                for term, tf_value in tf.items():
+                    # Check if the term is not in output_data
+                    if term not in output_data:
+                        output_data[term] = {
+                            'tf': {}  # Ensure 'tf' is initialized for this term
+                        }
+                    # Now safely add the tf_value to the 'tf' dictionary
+                    output_data[term]['tf'][fileName] = tf_value
+
             
             invertedIndexFile = script_dir / '..' / 're' / 'inverted_index.json'
             with open(invertedIndexFile, 'w') as file:
-                json.dump(invertedIndex, file, indent=4, sort_keys=True)
+                """ json.dump(invertedIndex, file, indent=4, sort_keys=True) """
+                json.dump(output_data, file, indent=4, sort_keys=True)
 
     def calculateTF(self,data):
         tf = {}

@@ -42,7 +42,7 @@ export const ResultPage = () => {
     
   }
   const [data, setData] = useState([]);
- 
+  
   const handleSearchSpecific = (id) => {
  
     window.location.href = `/information/${id}`;
@@ -52,6 +52,7 @@ export const ResultPage = () => {
     const result = sessionStorage.getItem('searchResults');
     if (result) {
       setData(JSON.parse(result)); // Update the state with parsed data
+      
     }
   }, []);
   return (
@@ -68,6 +69,7 @@ export const ResultPage = () => {
         </div>
     {data.length > 0 ? (
       <ul>
+        {/* <p>there is {dataLength} documents</p> */}
         {data.map((item, index) => (
           <li key={index} onClick={()=>{
             handleSearchSpecific(item.doc_id)

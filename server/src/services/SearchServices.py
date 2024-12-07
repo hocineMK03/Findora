@@ -24,8 +24,16 @@ class SearchServices:
 
         
         words = [part for word in words for part in re.split(r'[^a-zA-Z0-9]+', word) if part]
-
-        return words
+        unique_words = list(set(words))
+        wordsLength=len(words)
+        word_frequencies = {}
+        for word in words:
+            word_frequencies[word] = word_frequencies.get(word, 0) + 1
+        
+        return unique_words,word_frequencies,wordsLength
+    
+    
+    """     def calcuateRequestWeight(self,words):"""  
     
     def initTheclasses(self):
         knowledge = KnowledgeTable()
@@ -33,36 +41,61 @@ class SearchServices:
         documentscontent=Documents()
         return knowledge, inversetable, documentscontent
     def handleRetrieveDocs(self, data):
-        knowledge, inversetable, documentscontent = self.initTheclasses()
-        words = self.tokenize(data)
-        
-        # Retrieve racines from KnowledgeTable
-        result = knowledge.retrieve_racines(words)
-        result0 = result[0]  # Assuming this is the dictionary of racines
-        
-        
-        resultdocs = {}
-        document_details = {}
-        document_scores = defaultdict(float)
-        # Loop through the racines and map each key to its documents
-        for racine, value in result0.items():
-            if value is not None:
-                # Retrieve documents for the current racine
-                documents = inversetable.retrieve_documents(value)
-                resultdocs[racine] = documents  
-                for doc_id, score in documents.items():  
-                    document_scores[doc_id] += score
-                for doc_id, score in document_scores.items():
-                    
-                    document_content=documentscontent.retrieve_snippet(doc_id)
-                    document_details[doc_id] = document_content
+        try:
+            knowledge, inversetable, documentscontent = self.initTheclasses()
+            words,word_freq,wordsLength= self.tokenize(data)
+            # Retrieve racines from KnowledgeTable
+            racines,racine_terms = knowledge.retrieve_racines(words)
+            result0 = racines  
+            
+            
+            resultdocs = {}
+            document_details = {}
+            document_scores = defaultdict(float)
+            
+            for racine, value in result0.items():
+                if value is not None:
                 
-        sorted_documents = [
-            {'doc_id': doc_id, 'score': score, 'snippet': document_details[doc_id]}
-            for doc_id, score in sorted(document_scores.items(), key=lambda x: x[1], reverse=True)
-        ]
-        
-        return sorted_documents
+                    documents = inversetable.retrieve_documents(value)
+                    resultdocs[racine] = documents  
+                    for doc_id, score in documents.items():
+                        # we have the freq of each term now we need to regroup them with each other term of the racine
+                        theRacinefreq = 0
+                        
+                        for word in word_freq:
+                            if word in racine_terms[racine]:
+                                theRacinefreq += word_freq[word]
+                        
+                        
+                        
+                        thescore=theRacinefreq 
+                        
+                        thescore=thescore * score 
+                        
+                        #added vectorial model
+                        document_scores[doc_id] += score *theRacinefreq
+                    
+                    for doc_id, score in list(document_scores.items()):  
+                        if score != 0:
+                            
+                            document_content = documentscontent.retrieve_snippet(doc_id)
+                            document_details[doc_id] = document_content
+                        else:
+                            # to remove  this will remove any score of 0
+                            del document_scores[doc_id]
+                    
+            sorted_documents = [
+                {'doc_id': doc_id, 'score': score, 'snippet': document_details[doc_id]}
+                for doc_id, score in sorted(document_scores.items(), key=lambda x: x[1], reverse=True)
+            ]
+            
+            
+                
+            
+            return sorted_documents
+        except Exception as e:
+            print(e)
+            return str(e)
 
     
     

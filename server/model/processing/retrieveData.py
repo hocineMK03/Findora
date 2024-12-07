@@ -24,13 +24,9 @@ def processTFIDFTable():
         filesData = json.load(file)
         tfTable = {}
         
-        termDocFreq = {}  # Will store the document frequency for each term
-        
-        # Step 1: Calculate TF for each document and count document frequency for IDF
+        termDocFreq = {}  
         for fileName, data in filesData.items():
             tfTable[fileName] = calculateTF(data)
-            
-            # Update the document frequency for each term   
             seen_terms_in_document = set()
         
             for word in data:
@@ -46,7 +42,7 @@ def processTFIDFTable():
         totaldocs = len(filesData)
         idfTable = {}
         
-        # Step 2: Calculate IDF for each term
+        """ # Step 2: Calculate IDF for each term
         for term, docFreq in termDocFreq.items():
             if docFreq == 0:
                 continue  # Skip terms that appear in no documents (shouldn't happen)
@@ -72,9 +68,22 @@ def processTFIDFTable():
                 
                 invertedIndex[term].append({"doc_id": filename, "weight": tfidf})
         
-        # Step 4: Write the inverted index (fichier inverse) to a file
-        with open('../re/inverted_index.json', 'w') as file:
-            json.dump(invertedIndex, file, indent=4, sort_keys=True)
+        # Step 4: Write the inverted index (fichier inverse) to a file """
+        
+        
+        output_data = {}
+        for fileName, tf in tfTable.items():
+            for term, tf_value in tf.items():
+                if term not in output_data:
+                    output_data[term] = {
+                        'termDocFreq': termDocFreq[term],
+                        'tf': {}
+                    }
+                output_data[term]['tf'][fileName] = tf_value
+                
+            
+        with open('../re/test.json', 'w') as file:
+            json.dump(output_data, file, indent=4, sort_keys=True)
 
 def calculateTF(data):
     tf = {}
@@ -324,12 +333,12 @@ def retrieve_text_files():
 
 
 start_time = time.perf_counter()
-retrieve_text_files()
+""" retrieve_text_files()
 processDocuments()
-retrieveRacines()
+retrieveRacines() """
 
 
-""" processTFIDFTable() """
+processTFIDFTable()
 end_time = time.perf_counter()
 print(end_time-start_time)
 

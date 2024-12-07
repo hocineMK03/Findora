@@ -1,4 +1,5 @@
 # src/models/DocumentModel.py
+from collections import defaultdict
 from src.config.db import connect_to_mongo
 
 class KnowledgeTable:
@@ -16,30 +17,28 @@ class KnowledgeTable:
     def retrieve_racines(self, words):
         racines = {}
         terms_and_documents = {}
+        racine_terms = defaultdict(list)  # To store terms associated with each racine
 
-        
         for word in words:
-            
             word_data = self.collection.find_one({"terms": word})  
-            
-            if word_data:
-                racine = word_data.get('racine', None)  
-                
 
-              
+            if word_data:
+                racine = word_data.get('racine', None)
+
                 if racine:
                     racines[word] = racine
+                    racine_terms[racine].append(word)  # Add the term to the list for the racine
                 else:
                     racines[word] = "No racine found"
                 
-                
+
                 terms_and_documents[racine] = {
                     "terms": word_data.get('terms', []),
-                    
                 }
             else:
                 racines[word] = None
                 terms_and_documents[word] = None
+                racine_terms[None].append(word)  # Add the term for words not found in the collection
 
-        return racines, terms_and_documents
-        
+        return racines, racine_terms
+

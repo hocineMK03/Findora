@@ -21,9 +21,7 @@ export const NavBar = () => {
         <li>
           <a href='/'>Home</a>
         </li>
-        <li>
-          <a href='/'>Who Are We ?</a>
-        </li>
+        
         <li>
           <a href={hrefrepo}>Our Repo</a>
         </li>

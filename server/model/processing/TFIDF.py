@@ -65,9 +65,9 @@ class TFIDF:
                     # Check if the term is not in output_data
                     if term not in output_data:
                         output_data[term] = {
-                            'tf': {}  # Ensure 'tf' is initialized for this term
+                            'tf': {}  
                         }
-                    # Now safely add the tf_value to the 'tf' dictionary
+                    
                     output_data[term]['tf'][fileName] = tf_value
 
             

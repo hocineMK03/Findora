@@ -7,7 +7,7 @@ class BigGramAlgo:
     def __init__(self):
         self.racine_metadata = {}
         self.processed_words = set()
-        self.racine_mapping = {}  # Maps words to their respective racine (root)
+        self.racine_mapping = {} 
 
     def retrieveRacines(self):
         script_dir = Path(__file__).resolve().parent
@@ -18,7 +18,7 @@ class BigGramAlgo:
 
         words = list(filesData.keys())
 
-        # Union-Find Data Structure for grouping similar terms together
+        
         parent = {}
 
         def find(x):

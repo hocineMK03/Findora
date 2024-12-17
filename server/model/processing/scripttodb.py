@@ -28,7 +28,7 @@ def putdocstomongo():
                         'content': content
                     }
                     collection.insert_one(document_data)
-                    print(f"Inserted: {file_path.name}")
+                    
             except Exception as e:
                 print(f"Error reading {file_path.name}: {e}")
 

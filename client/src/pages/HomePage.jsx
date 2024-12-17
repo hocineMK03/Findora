@@ -20,7 +20,10 @@ export const HomePage = () => {
       
       const data=result.data
       sessionStorage.setItem("searchResults", JSON.stringify(data));
-
+      sessionStorage.setItem("resultLength",data.length)
+      sessionStorage.setItem("searchRequest",search.request)
+      
+      
       
       window.location.href = '/result';
     }

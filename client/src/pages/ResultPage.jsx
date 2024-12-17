@@ -13,21 +13,32 @@ export const ResultPage = () => {
     }
    )  
 
-  
+   const [length,setLength]=useState(0)
+   const [searchRequest,setSearchRequest]=useState("")
   const handleSearch = async(e) => {
     e.preventDefault();
-    const result=await searchSevices.handleSearch(search)
+    try{
+      const result=await searchSevices.handleSearch(search)
     
     if(result.status===200){
       
       const data=result.data
       sessionStorage.setItem("searchResults", JSON.stringify(data));
+      sessionStorage.setItem("resultLength",data.length)
+      sessionStorage.setItem("searchRequest",search.request)
 
+
+      setLength(data.length)
+      setSearchRequest(search.request)
+      setData(data)
       
-      window.location.href = '/result';
     }
     else{
       console.log('error')
+    }
+    }
+    catch(e){
+      console.log(e)
     }
   }
 
@@ -54,13 +65,25 @@ export const ResultPage = () => {
       setData(JSON.parse(result)); // Update the state with parsed data
       
     }
+
+    const resultLength = sessionStorage.getItem('resultLength');
+    if (resultLength) {
+      setLength(resultLength); 
+      
+    }
+
+    const searchRequest = sessionStorage.getItem('searchRequest');
+    if (searchRequest) {
+      setSearch({ ...search, ["request"]: searchRequest })
+      
+    }
   }, []);
   return (
     <div className="result-container">
       <div className='home-search'>
         <textarea
     name="request"
-    value={search.request}
+    value={search.request }
     placeholder="Search for anything..."
     onChange={handleChange}
     rows="1" 
@@ -69,7 +92,9 @@ export const ResultPage = () => {
         </div>
     {data.length > 0 ? (
       <ul>
-        {/* <p>there is {dataLength} documents</p> */}
+        <div className='result-length'>
+        <p>there is {length} documents</p>
+        </div>
         {data.map((item, index) => (
           <li key={index} onClick={()=>{
             handleSearchSpecific(item.doc_id)

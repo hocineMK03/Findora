@@ -76,13 +76,8 @@ class SearchServices:
                         document_scores[doc_id] += score *theRacinefreq
                     
                     for doc_id, score in list(document_scores.items()):  
-                        if score != 0:
-                            
-                            document_content = documentscontent.retrieve_snippet(doc_id)
-                            document_details[doc_id] = document_content
-                        else:
-                            # to remove  this will remove any score of 0
-                            del document_scores[doc_id]
+                        document_content = documentscontent.retrieve_snippet(doc_id)
+                        document_details[doc_id] = document_content
                     
             sorted_documents = [
                 {'doc_id': doc_id, 'score': score, 'snippet': document_details[doc_id]}

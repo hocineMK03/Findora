@@ -64,6 +64,35 @@
     font-weight: 400;
     padding: 30px;
   }
+
+  .home-search textarea {
+   
+    width: 50%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    resize:both;
+    line-height: 1.1; /* Adjust line height */
+    transition: height 0.2s ease; /* Smooth transition */
+    min-width: 450px;
+    min-height: 30px;
+    overflow-y: auto;
+  }
+  .result-length{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .result-length p{
+    padding: 1rem;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+  }
   
   @media (max-width: 768px) {
     .result-container {
